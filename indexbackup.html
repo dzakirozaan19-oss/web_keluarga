@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KELUARGA CEMARA - Digital Family Hub</title>
+<link rel="stylesheet" href="stylebackup.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="lock-screen">
+
+    <div class="lock-box">
+
+        <h1>
+            FAMILY SYSTEM
+        </h1>
+
+        <input
+        type="password"
+        id="systemPassword"
+        placeholder="Enter Password"
+        >
+
+        <button onclick="unlockSystem()">
+
+            ACCESS
+
+        </button>
+
+    </div>
+
+</div>
+
+<div id="main-web"></div>
+
+<div id="boot-screen">
+
+    <h1>KELOARGA CEMARA</h1>
+
+    <p id="boot-text">
+        INITIALIZING SYSTEM...
+    </p>
+
+    <div class="loading-bar">
+
+        <div id="loading-fill"></div>
+
+    </div>
+
+</div>
+
+<canvas id="matrix"></canvas>
+
+<div class="grid-bg"></div>
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<div class="top-controls">  
+<div class="music-player">
+
+<button onclick="toggleMusic()">🎵 
+  MUSIC</button>
+<button onclick="nextMusic()">
+  ⏭</button>
+
+<div class="music-bars">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+    <input
+        type="range"
+        class="volume-slider"
+        min="0"
+        max="100"
+        value="30"
+        onchange="setVolume(this.value)"
+    >
+
+    <p id="music-name">
+        NOW PLAYING
+    </p>
+
+</div>
+
+</div>
+
+<audio id="bgm" control hidden></audio>
+
+<div class="container">
+  <header>
+    <h1>KELUARGA CEMARA</h1>
+    <p class="subtitle">// SYSTEM ONLINE // CONNECTED //</p>
+  </header>
+
+  <nav>
+    <a href="#home" data-sound="hover">HOME</a>
+    <a href="#anggota" data-sound="hover">MEMBERS</a>
+    <a href="#familychat" data-sound="hover">CHAT</a>
+    <a href="#galeri" data-sound="hover">ARCHIVE</a>
+    <a href="#agenda" data-sound="hover">EVENTS</a>
+    <a href="#gamepanel" data-sound="hover">ARCADE</a>
+    <a href="#kontak" data-sound="hover">CONTACT</a>
+  </nav>
+
+  <section id="home" class="section">
+    <h2>> SYSTEM INITIALIZED</h2>
+    <p style="text-align:center; font-size:20px; line-height:2; color:#ccc;">
+      Welcome to <span style="color:var(--neon-cyan);">KELUARGA CEMARA</span> - Digital Hub Keluarga Digital<br>
+      Database tersinkronisasi. Semua memori, agenda, dan data anggota tersimpan aman di cloud.<br>
+      <span style="color:var(--neon-pink);">Status: ACTIVE | Encryption: ENABLED | Members: 5</span>
+    </p>
+  </section>
+
+  <section id="anggota" class="section">
+    <h2>> MEMBER DATABASE</h2>
+    <div class="family-grid">
+      <div class="member-card">
+        <div class="member-photo"><img src="images/ayah.jpeg" alt="Junaidi"></div>
+        <div class="member-name">JUNAIDI</div>
+        <div class="member-role">ADMIN / FATHER</div>
+        <p style="margin-top:15px; color:#aaa;">ID: 01-12-1977 | STATUS: ONLINE</p>
+      </div>
+      <div class="member-card">
+        <div class="member-photo"><img src="images/bunda.jpeg" alt="Dewi Sri Wahyuni"></div>
+        <div class="member-name">DEWI SRI WAHYUNI</div>
+        <div class="member-role">MODERATOR / MOTHER</div>
+        <p style="margin-top:15px; color:#aaa;">ID: 20-08-1983 | STATUS: ONLINE</p>
+      </div>
+      <div class="member-card">
+        <div class="member-photo"><img src="images/rozaan.jpeg" alt="Rozaan Dzaki Akrami"></div>
+        <div class="member-name">ROZAAN DZAKI AKRAMI</div>
+        <div class="member-role">USER / BIG BROTHER</div>
+        <p style="margin-top:15px; color:#aaa;">ID: 17-08-2006 | STATUS: ONLINE</p>
+      </div>
+      <div class="member-card">
+        <div class="member-photo"><img src="images/reihan.jpeg" alt="Reihan Adli Tsaqif"></div>
+        <div class="member-name">REIHAN ADLI TSAQIF</div>
+        <div class="member-role">USER / BROTHER</div>
+        <p style="margin-top:15px; color:#aaa;">ID: 10-02-2011 | STATUS: ONLINE</p>
+      </div>
+      <div class="member-card">
+        <div class="member-photo"><img src="images/embod.jpeg" alt="Muhammad Rafardhan Abyan"></div>
+        <div class="member-name">MUHAMMAD RAFARDHAN ABYAN</div>
+        <div class="member-role">USER / LITTLE BROTHER</div>
+        <p style="margin-top:15px; color:#aaa;">ID: 08-12-2018 | STATUS: ONLINE</p>
+      </div>
+    </div>
+  </section>
+
+<!-- USERNAME POPUP -->
+
+<div id="username-popup">
+
+    <div class="username-box">
+
+        <h2>IDENTITAS USER</h2>
+
+        <input
+        type="text"
+        id="usernameInput"
+        placeholder="Masukkan Nama..."
+        >
+
+        <button onclick="saveUsername()">
+        MASUK
+        </button>
+
+    </div>
+
+</div>
+
+<div class="family-chat"
+
+id="familychat"
+>    
+
+<h2>FAMILY CHAT</h2>
+
+<div id="messages"></div>
+
+<div id="typingStatus"></div>
+
+<div class="chat-input">
+
+<input
+type="file"
+id="imageInput"
+accept="image/*"
+hidden
+>
+
+<button
+onclick="document.getElementById('imageInput').click()"
+class="image-btn">
+
+🖼️
+
+</button>
+
+<input
+type="text"
+id="chatInput"
+placeholder="Ketik pesan..."
+>
+<button onclick="sendMessage()">  
+Kirim                                
+</button>                          
+
+<button onclick="startRecord()">
+
+🎤
+
+</button>
+
+</div>
+
+</div>
+
+  <section id="galeri" class="section">
+    <h2>> MEMORY ARCHIVE</h2>
+    <div class="gallery">
+      <div class="gallery-item" data-sound="click">
+        <img src="images/lebaran.jpeg" alt="Lebaran 2026">
+        <span>📸 LEBARAN_2026.DAT</span>
+      </div>
+      <div class="gallery-item" data-sound="click">
+        <img src="images/memori(1).jpeg" alt="MEMORI(1)">
+        <span>📸 MEMORI_01.DAT</span>
+      </div>
+      <div class="gallery-item" data-sound="click">
+        <img src="images/memori(2).jpeg" alt="MEMORI(2)">
+        <span>📸 MEMORI_02.DAT</span>
+      </div>
+      <div class="gallery-item" data-sound="click">
+        <img src="images/memori(3).jpeg" alt="MEMORI(3)">
+        <span>📸 MEMORI_03.DAT</span>
+      </div>
+      <div class="gallery-item" data-sound="click">
+        <img src="images/jalan.jpeg" alt="JALAN_JALAN">
+        <span>📸 JALAN_JALAN.DAT</span>
+      </div>
+      <div class="gallery-item" data-sound="click">
+        <img src="images/heros.jpeg" alt="OUR HEROS">
+        <span>📸 OUR_HEROS.DAT</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="agenda" class="section">
+    <h2>> EVENT SCHEDULER</h2>
+    <ul class="event-list">
+      <li class="event-item">
+        <div class="event-date">10-02-2026</div>
+        <div class="event-title">REIHAN.BIRTHDAY</div>
+        <p>Location: HOME_SERVER | Protocol: DINNER + GIFT_EXCHANGE</p>
+      </li>
+      <li class="event-item">
+        <div class="event-date">17-08-2026 / 20-08-2026</div>
+        <div class="event-title">ROZAAN_AND_MOTHER.BIRTHDAY</div>
+        <p>Location: HOME_SERVER | Protocol: DINNER + GIFT_EXCHANGE</p>
+      </li>
+      <li class="event-item">
+        <div class="event-date">01-12-2026 / 08-12-2026</div>
+        <div class="event-title">ABYAN_AND_FATHER.BIRTHDAY</div>
+        <p>Location: HOME_SERVER | Protocol: DINNER + GIFT_EXCHANGE</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- GAME GW TARO SINI BIAR GA LONCAT KE BAWAH -->
+  <section id="gamepanel" class="section">
+    <h2>> WORD_ARCADE</h2>
+    <div class="gamepanel">
+        <div class="kategori-pilih">
+            <label>SELECT_CATEGORY:</label>
+            <select id="kategori" onchange="gantiKategori()">
+                <option value="tech">TECH</option>
+                <option value="gaming">GAMING</option>
+                <option value="anime">ANIME</option>
+                <option value="random">RANDOM</option>
+            </select>
+        </div>
+        <div id="scramble-word">PILIH KATEGORI DULU</div>
+        <input type="text" id="jawabanGame" placeholder="Ketik jawaban...">
+        <button id="btnSubmit" onclick="cekJawabanGame()">SUBMIT</button>
+        <button id="btnSkip" onclick="nextWord()">SKIP</button>
+        <button id="btnHint" onclick="bantuan()">HINT -5PTS</button>
+        <p>Skor: <span id="skor">0</span> | Streak: <span id="streak">0</span>🔥 | Waktu: <span id="waktu">30</span>s</p>
+        <p id="hasil-game"></p>
+    </div>
+  </section>
+
+  <section id="kontak" class="section">
+    <h2>> CONTACT_NODE</h2>
+    <div style="text-align:center; font-size:20px; line-height:2.5;">
+      <p>📧 EMAIL: <span style="color:var(--neon-cyan);">dzakirozaan19@gmail.com/dewiwahyuni1820@Gmail.com/junaidithamrin64@Gmail.com/reihantsaqif75@Gmail.com</span></p>
+      <p>📱 WHATSAPP: <span style="color:var(--neon-cyan);">+62 853-7261-3905/+62 895-3658-80370/+62 853-5884-4566/+62 821-7297-5917</span></p>
+      <p>📍 COORDINATES: <span style="color:var(--neon-cyan);">Jl. Anggur Merah No.3, Batang Serosa, Riau 28784</span></p>
+      <p style="margin-top:30px; color:var(--neon-pink); font-family:'Orbitron',sans-serif;">
+        "// FAMILY = NETWORK_STRONGEST
+        PROTOCOL"
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 KELUARGA.CEMARA 
+       POWERED BY LOVE.DLL</p>
+    <p style="margin-top:10px; font-size:14px; opacity:0.7;">LAST_SYNC: 2026.05.11 | UPTIME: 99.9%</p>
+  </footer>
+
+</div>
+
+<!-- ================= AI CHAT ================= -->
+
+<div class="jarvis-container" id="jarvis-chat">
+
+    <div class="jarvis-header">
+
+        <span>A.I_CORE</span>
+
+        <button id="close-ai"
+        onclick="toggleBubble()">
+        ✕
+        </button>
+
+    </div>
+
+    <div id="jarvis-body">
+
+        <div id="chat-log">
+
+            <p>
+            <strong>A.I_CORE:</strong>
+            Neural Link Connected 🤖
+            </p>
+
+        </div>
+
+        <div class="input-area">
+
+            <input
+            type="text"
+            id="user-input"
+            placeholder="Ketik pesan..."
+            >
+
+            <button onclick="kirimPesan()">
+            ➤
+            </button>
+
+            <button onclick="mulaiDengar()">
+            🎤
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="jarvis-bubble">
+🤖
+</div>
+
+<div id="scanline"></div>
+
+<canvas id="live2d"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.5.8/browser/pixi.min.js"></script>
+
+<script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+
+<script src="https://unpkg.com/pixi-live2d-display/dist/cubism4.min.js"></script>
+
+<audio id="hover-sound" src="sound/hover.mp3"></audio>
+<audio id="click-sound" src="sound/click.mp3"></audio>
+
+<div id="hud-clock"></div>
+
+<div id="system-status">
+
+    SYSTEM ONLINE
+
+</div>
+
+<div id="typing-console"></div>
+
+<!-- CYBER DRAGON -->
+<img
+    src="images/dragon.png"
+    class="cyber-dragon"
+/>
+
+<script src="script3.js"></script>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getDatabase,
+ref,
+push,
+onValue,
+remove,
+set
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyB9T7G67iXqPabwbwQ8pjl9vv3mKmYHyEQ",
+
+authDomain:
+"keluarga-cemara-dc74f.firebaseapp.com",
+
+databaseURL:
+"https://keluarga-cemara-dc74f-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+projectId:
+"keluarga-cemara-dc74f",
+
+storageBucket:
+"keluarga-cemara-dc74f.firebasestorage.app",
+
+messagingSenderId:
+"1091782553728",
+
+appId:
+"1:1091782553728:web:54ee2810140b450e2e7665"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+window.db = db;
+window.ref = ref;
+window.push = push;
+window.onValue = onValue;
+
+// =========================
+// SEND MESSAGE
+// =========================
+
+window.sendMessage = function(){
+
+    const input =
+    document.getElementById(
+        "chatInput"
+    );
+
+    const text =
+    input.value.trim();
+
+    if(text === "") return;
+
+    push(
+
+        ref(db,"familyChat"),
+
+        {
+
+            user: currentUser,
+
+            message: text,
+
+            time: Date.now()
+
+        }
+
+    );
+
+    input.value = "";
+
+}
+
+/* ========================= */
+/* ENTER TO SEND */
+/* ========================= */
+
+document
+.getElementById("chatInput")
+.addEventListener(
+
+    "keypress",
+
+    function(event){
+
+        if(event.key === "Enter"){
+
+            sendMessage();
+
+        }
+
+    }
+
+);
+
+// =========================
+// REALTIME MESSAGE
+// =========================
+
+const messagesRef =
+
+ref(db,"familyChat");
+
+let firstLoad = true;
+
+onValue(messagesRef, (snapshot) => {
+
+    const messages = snapshot.val() || {};
+
+    const chatBox =
+    document.getElementById("messages");
+
+    chatBox.innerHTML = "";
+
+    if (!firstLoad) {
+        const notif =
+        document.getElementById("notifSound");
+        notif.currentTime = 0;
+        notif.play()
+
+        .catch(()=>{});       
+
+    }
+
+    const messageArray =
+
+    Object.entries(messages)
+
+    .slice(-40);
+
+    for (
+
+    let [id,msg]
+
+    of messageArray
+
+) {
+
+     const msg = messages[id];
+
+chatBox.innerHTML += `
+
+<div
+
+class="chat-bubble ${msg.user === currentUser ? "my-chat" : "other-chat"}"
+
+data-id="${id}"
+
+>
+
+    <div class="chat-header">
+
+    <small class="chat-time">
+
+    ${new Date(
+        msg.time
+    ).toLocaleTimeString(
+        [],
+        {
+            hour:'2-digit',
+            minute:'2-digit'
+        }
+    )}
+
+    </small>
+
+        <span class="avatar">
+
+            ${
+                msg.user === "ROZAAN"
+                ? "😎"
+
+                : msg.user === "JUNAIDI"
+                ? "👨"
+
+                : msg.user === "DEWI"
+                ? "👩"
+
+                : msg.user === "REIHAN"
+                ? "🧒"
+
+                : "👤"
+            }
+
+        </span>
+
+        <strong>${msg.user}</strong>
+
+        <span class="online-dot">
+            🟢
+        </span>
+
+    </div>
+
+${
+    msg.message
+
+    ?
+
+    `<p>${msg.message}</p>`
+
+    :
+
+    ""
+}
+
+${
+    msg.image
+
+    ?
+
+    `<img
+        src="${msg.image}"
+        class="chat-image"
+        loading="lazy"
+    >`
+
+    :
+
+    ""
+}
+
+
+${
+    msg.audio
+
+    ?
+
+    `
+
+    <audio controls
+    class="voice-player">
+    preload="none"
+
+        <source
+        src="${msg.audio}">
+
+    </audio>
+
+    `
+
+    :
+
+    ""
+}
+
+<div class="reaction-bar">
+
+    <span class="react-btn">
+        ❤️
+    </span>
+
+    <span class="react-btn">
+        😂
+    </span>
+
+    <span class="react-btn">
+        😭
+    </span>
+
+    <span class="react-btn">
+        🔥
+    </span>
+
+</div>
+
+<div class="reaction-result"></div>
+
+`;
+
+  }
+
+    chatBox.scrollTop =
+    chatBox.scrollHeight;
+
+    firstLoad = false;
+
+});
+
+// ================= USERNAME =================
+
+let currentUser =
+localStorage.getItem(
+    "familyUser"
+);
+
+const popup =
+document.getElementById(
+    "username-popup"
+);
+
+if(currentUser){
+
+    popup.style.display =
+    "none";
+
+}
+window.saveUsername = function(){
+
+    const input =
+    document.getElementById(
+        "usernameInput"
+    );
+
+    const name =
+    input.value.trim();
+
+    if(name === "") return;
+
+    localStorage.setItem(
+        "familyUser",
+        name
+    );
+
+    currentUser = name;
+
+    popup.style.display =
+    "none";
+
+};
+
+
+const typingStatus =
+document.getElementById(
+    "typingStatus"
+);
+
+const chatInput =
+document.getElementById(
+    "chatInput"
+);
+
+const username = currentUser;
+
+let typingTimer;
+
+chatInput.addEventListener(
+
+    "input",
+
+    ()=>{
+
+        typingStatus.innerText =
+            username +
+          " sedang mengetik...";
+
+
+        clearTimeout(
+            typingTimer
+        );
+
+        typingTimer =
+        setTimeout(()=>{
+
+            typingStatus.innerText =
+            "";
+
+        },1000);
+
+    }
+
+);
+
+// ================= ONLINE STATUS =================
+
+const onlineRef =
+ref(db,"onlineUsers/" + currentUser);
+
+set(
+
+    onlineRef,
+
+    {
+
+        name: currentUser,
+
+        online:true
+
+    }
+
+);
+
+// hapus saat keluar
+
+window.addEventListener(
+
+    "beforeunload",
+
+    ()=>{
+
+        remove(onlineRef);
+
+    }
+
+);
+
+// realtime online list
+
+onValue(
+
+    ref(db,"onlineUsers"),
+
+    (snapshot)=>{
+
+        const data =
+        snapshot.val() || {};
+
+        const onlineList =
+        document.getElementById(
+            "onlineList"
+        );
+
+        onlineList.innerHTML = "";
+
+        for(let id in data){
+
+            onlineList.innerHTML += `
+
+            <div class="online-user">
+
+                🟢 ${data[id].name}
+
+            </div>
+
+            `;
+
+        }
+
+    }
+
+);
+
+document.onclick = function(e){
+
+    if(
+
+        e.target.classList.contains(
+            "react-btn"
+        )
+
+    ){
+
+        const emoji =
+        e.target.innerText;
+
+        const bubble =
+        e.target.closest(
+            ".chat-bubble"
+        );
+
+        const result =
+        bubble.querySelector(
+            ".reaction-result"
+        );
+
+        result.innerText =
+        emoji;
+
+    }
+
+};
+
+
+// ================= IMAGE SEND =================
+
+document
+.getElementById(
+    "imageInput"
+)
+.addEventListener(
+
+    "change",
+
+    function(){
+
+        const file =
+        this.files[0];
+
+        if(!file) return;
+
+        const reader =
+        new FileReader();
+
+        reader.onload =
+        function(e){
+
+            push(
+
+                ref(db,"familyChat"),
+
+                {
+
+                    user:
+                    currentUser,
+
+                    image:
+                    e.target.result,
+
+                    time:
+                    Date.now()
+
+                }
+
+            );
+
+        };
+
+        reader.readAsDataURL(
+            file
+        );
+
+    }
+
+);
+
+// =========================
+// VOICE NOTE
+// =========================
+
+let mediaRecorder;
+let audioChunks = [];
+
+window.startRecord = async function(){
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+        audio: true
+    });
+
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+
+    mediaRecorder.ondataavailable = (event) => {
+        audioChunks.push(event.data);
+    };
+
+    mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            push(ref(db, "familyChat"), {
+                user: currentUser,
+                audio: reader.result,
+                time: Date.now()
+            });
+        };
+
+        reader.readAsDataURL(audioBlob);
+    };
+
+    mediaRecorder.start();
+    alert("Recording...");
+
+    setTimeout(() => {
+        if (mediaRecorder && mediaRecorder.state !== "inactive") {
+            mediaRecorder.stop();
+            alert("Voice note terkirim 🔥");
+        }
+    }, 5000);
+};
+
+// ================= IMAGE VIEWER =================
+
+const viewer =
+
+document.getElementById(
+    "imageViewer"
+);
+
+const fullscreenImage =
+
+document.getElementById(
+    "fullscreenImage"
+);
+
+document.addEventListener(
+
+    "click",
+
+    function(e){
+
+        if(
+
+            e.target.classList.contains(
+                "chat-image"
+            )
+
+        ){
+
+            fullscreenImage.src =
+            e.target.src;
+
+            viewer.style.display =
+            "flex";
+
+        }
+
+    }
+
+);
+
+viewer.onclick = function(){
+
+    viewer.style.display =
+    "none";
+
+};
+
+// ================= DELETE MESSAGE =================
+
+document.addEventListener(
+
+    "dblclick",
+
+    function(e){
+
+        const bubble =
+
+        e.target.closest(
+            ".chat-bubble"
+        );
+
+        if(!bubble) return;
+
+        const chatId =
+        bubble.dataset.id;
+
+        console.log(chatId);
+
+        if(!chatId){
+
+            alert(
+                "ID tidak ada"
+            );
+
+            return;
+
+        }
+
+        if(
+
+            !bubble.classList.contains(
+                "my-chat"
+            )
+
+        ) return;
+
+        const yakin =
+        confirm(
+            "Hapus pesan?"
+        );
+
+        if(!yakin) return;
+
+        remove(
+
+            ref(
+                db,
+                "familyChat/" + chatId
+            )
+
+        );
+
+    }
+
+);
+
+// ================= MOBILE DELETE =================
+
+let holdTimer;
+
+document.addEventListener(
+
+    "touchstart",
+
+    function(e){
+
+        const bubble =
+
+        e.target.closest(
+            ".chat-bubble"
+        );
+
+        if(!bubble) return;
+
+        /* HANYA CHAT SENDIRI */
+
+        if(
+
+            !bubble.classList.contains(
+                "my-chat"
+            )
+
+        ) return;
+
+        holdTimer = setTimeout(()=>{
+
+            const chatId =
+
+            bubble.dataset.id;
+
+            if(!chatId) return;
+
+            const yakin = confirm(
+                "Hapus pesan?"
+            );
+
+            if(!yakin) return;
+
+            remove(
+
+                ref(
+                    db,
+                    "familyChat/" +
+                    chatId
+                )
+
+            );
+
+        },1000);
+
+    }
+
+);
+
+/* BATALKAN HOLD */
+
+document.addEventListener(
+
+    "touchend",
+
+    ()=>{
+
+        clearTimeout(
+            holdTimer
+        );
+
+    }
+
+);
+
+</script>
+
+<audio
+id="notifSound" src="sound/notif.mp3">
+</audio>
+
+<div id="imageViewer">
+
+    <img id="fullscreenImage">
+
+</div>
+
+</div>
+
+</body>
+</html>
