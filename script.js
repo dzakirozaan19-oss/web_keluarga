@@ -347,7 +347,7 @@ else if (
         true
     );
 
-    ngomong("priasolo.WAV");
+    ngomong("priasolo.wav");
 
 }
     // =====================================
