@@ -2301,3 +2301,11 @@ window.unlockSystem = function(){
     }
 
 };
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/web_keluarga/sw.js')
+      .then(reg => console.log('SW registered:', reg))
+      .catch(err => console.log('SW failed:', err));
+  });
+}
